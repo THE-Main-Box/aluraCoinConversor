@@ -6,59 +6,70 @@ public class SetConvertion {
 
     private GetConvertionRate convertionRate;
     private ConnectToApi connectToApi = new ConnectToApi();
-    private String toFind, passed, response;
+    private String toFindEquivalentCurrency, currency, response;
     private Menu menu = new Menu();
     private double value, convertedValue;
+    private boolean breakProgram = false;
 
 
     public void set(int choice){
 
+        breakProgram = false;
+
         switch (choice){
             case 1:
-                passed = "usd";
-                toFind = "brl";
+                currency = "usd";
+                toFindEquivalentCurrency = "brl";
                 break;
             case 2:
-                passed = "brl";
-                toFind = "usd";
+                currency = "brl";
+                toFindEquivalentCurrency = "usd";
                 break;
             case 3:
-                passed = "usd";
-                toFind = "eur";
+                currency = "usd";
+                toFindEquivalentCurrency = "eur";
                 break;
             case 4:
-                passed = "eur";
-                toFind = "usd";
+                currency = "eur";
+                toFindEquivalentCurrency = "usd";
                 break;
             case 5:
-                passed = "ars";
-                toFind = "usd";
+                currency = "ars";
+                toFindEquivalentCurrency = "usd";
                 break;
             case 6:
-                passed = "usd";
-                toFind = "ars";
+                currency = "usd";
+                toFindEquivalentCurrency = "ars";
                 break;
+            default:
+                System.out.println("Escolha uma opção válida");
+                breakProgram = true;
+                break;
+        }
+
+        if(breakProgram){
+            return;
         }
 
         value = menu.setValueToConvert();
 
         convertedValue = this.calculate();
 
-        menu.showConvertedValue(convertedValue);
+        menu.showConvertedValue(value, currency.toUpperCase(), convertedValue, toFindEquivalentCurrency.toUpperCase());
     }
 
     private double calculate(){
-        response = connectToApi.search(passed);
+        response = connectToApi.search(currency);
         convertionRate = new GetConvertionRate(response);
 
-        convertionRate.getConvertion(passed);
-        double ratePassed = convertionRate.getConversionRate();
+        convertionRate.getConvertion(currency);
+        double rateCurrency = convertionRate.getConversionRate();
 
-        convertionRate.getConvertion(toFind);
+        convertionRate.getConvertion(toFindEquivalentCurrency);
         double rateToFind = convertionRate.getConversionRate();
 
 
-        if (ratePassed != 0 && rateToFind != 0) {
+        if (rateCurrency != 0 && rateToFind != 0) {
             convertionRate.convert(value);
             return convertionRate.getConvertedValue();
         } else {

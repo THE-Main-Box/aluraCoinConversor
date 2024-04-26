@@ -37,9 +37,9 @@ public class Menu {
         return reader.nextDouble();
     }
 
-    public void showConvertedValue(double convertedValue){
-        System.out.println("O resultado da conversão é");
-        System.out.println("[%.2f]".formatted(convertedValue));
+    public void showConvertedValue(double ogValue, String ogCurrency, double convertedValue, String currency){
+        System.out.println("O resultado da conversão de [%.2f] %s é".formatted(ogValue, ogCurrency));
+        System.out.println("[%.2f]%s".formatted(convertedValue, currency));
     }
 
 }
