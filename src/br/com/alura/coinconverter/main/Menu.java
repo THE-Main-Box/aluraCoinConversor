@@ -7,6 +7,7 @@ public class Menu {
     private Scanner reader = new Scanner(System.in);
     private int choice;
 
+//    apenas um menu onde é mostrado as opções disponiveis
     public int lobby(){
         System.out.println("********************************************");
         System.out.println("Seja bem vindo ao CONVERSOR DE MOEDAS.");
@@ -37,9 +38,9 @@ public class Menu {
         return reader.nextDouble();
     }
 
-    public void showConvertedValue(double ogValue, String ogCurrency, double convertedValue, String currency){
-        System.out.println("O resultado da conversão de [%.2f] %s é".formatted(ogValue, ogCurrency));
-        System.out.println("[%.2f]%s".formatted(convertedValue, currency));
+    public void showConvertedValue(double ogValue, String ogCurrency, double convertedValue, String convetedCurrency){
+        System.out.println("O resultado da conversão de [%.2f] %s para [%s] é".formatted(ogValue, ogCurrency, convetedCurrency));
+        System.out.println("[%.2f]%s".formatted(convertedValue, convetedCurrency));
     }
 
 }

@@ -4,7 +4,7 @@ import br.com.alura.coinconverter.api.ConnectToApi;
 
 public class SetConvertion {
 
-    private GetConvertionRate convertionRate;
+    private GetConvertionRate convertionRate = new GetConvertionRate();
     private ConnectToApi connectToApi = new ConnectToApi();
     private String toFindEquivalentCurrency, currency, response;
     private Menu menu = new Menu();
@@ -59,8 +59,11 @@ public class SetConvertion {
     }
 
     private double calculate(){
+//        reaiza a requisição passando o tipo de moeda
         response = connectToApi.search(currency);
-        convertionRate = new GetConvertionRate(response);
+
+//      atualiza os valores da response
+        convertionRate.patchApiResponse(response);
 
         convertionRate.getConvertion(currency);
         double rateCurrency = convertionRate.getConversionRate();

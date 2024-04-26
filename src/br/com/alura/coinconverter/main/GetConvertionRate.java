@@ -8,12 +8,11 @@ import java.util.Map;
 public class GetConvertionRate {
 
     private String response;
-    private Gson gson;
+    private Gson gson = new Gson();
     private double conversionRates, convertedValue;
 
-    public GetConvertionRate(String apiResponse){
+    public void patchApiResponse(String apiResponse){
         response = apiResponse;
-        gson = new Gson();
     }
 
     public void getConvertion(String currency){
